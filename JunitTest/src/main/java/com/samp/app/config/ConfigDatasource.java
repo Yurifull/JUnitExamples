@@ -18,7 +18,7 @@ public class ConfigDatasource {
 	public static final String DATASOURCE = "ds/datasource";
 
 	@Bean(name=DATASOURCE)
-	@ConfigurationProperties(prefix = "spring.datasource")
+	@ConfigurationProperties(prefix = "postgres.junit")
 	@Primary
 	public DataSource getDataSourceOperacional() {
 		return new HikariDataSource();

@@ -9,6 +9,10 @@ public class FilmTO implements Serializable{
 
 	private static final long serialVersionUID = 7673327032416918910L;
 	
+	public FilmTO(String code) {
+		this.code=code;
+	}
+	
 	private String code;
 
 	public String getCode() {

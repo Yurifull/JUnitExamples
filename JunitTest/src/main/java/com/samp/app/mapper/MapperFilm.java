@@ -15,7 +15,7 @@ import com.samp.app.model.FilmTO;
 @JunitMapper
 public interface MapperFilm {
 	
-	@Select(value="{CALL findallmovies()}")
+	@Select(value="{CALL junit.findallmovies()}")
 	@Options(statementType = StatementType.CALLABLE)
 	@Results({
 		@Result(property="code", column="code")
