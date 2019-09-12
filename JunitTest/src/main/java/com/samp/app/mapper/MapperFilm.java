@@ -12,6 +12,7 @@ import org.apache.ibatis.mapping.StatementType;
 import com.samp.app.model.FilmTO;
 
 @Mapper
+@JunitMapper
 public interface MapperFilm {
 	
 	@Select(value="{CALL findallmovies()}")
