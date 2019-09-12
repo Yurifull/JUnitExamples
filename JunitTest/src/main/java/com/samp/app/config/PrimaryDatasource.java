@@ -21,7 +21,7 @@ import com.samp.app.mapper.JunitMapper;
 @MapperScan(basePackages= "com.samp.app.mapper", sqlSessionFactoryRef="sessionFactory")
 public class PrimaryDatasource {
 	
-	private static final String SESSION_FACTORY = "sessionFactory";
+	public static final String SESSION_FACTORY = "sessionFactory";
 	
 	@Bean(name = SESSION_FACTORY)
 	@Primary

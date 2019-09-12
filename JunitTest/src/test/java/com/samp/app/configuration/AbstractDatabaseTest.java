@@ -1,4 +1,4 @@
-package com.samp.app.junittest;
+package com.samp.app.configuration;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,11 +14,17 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.opentable.db.postgres.embedded.EmbeddedPostgres;
+import com.samp.app.config.ConfigDatasource;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  * Class for started database postgres session.
@@ -29,11 +35,11 @@ import com.opentable.db.postgres.embedded.EmbeddedPostgres;
  * @Author yperez
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest()
+@SpringBootTest
 @TestPropertySource("classpath:application-test.properties")
-public class AbstractTest {
+public class AbstractDatabaseTest {
 	
-	protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractTest.class);
+	protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractDatabaseTest.class);
 	
 	protected static EmbeddedPostgres embeddedPostgres;
 	
@@ -51,6 +57,21 @@ public class AbstractTest {
 		loadData();
 		LOGGER.info("Embedded PostgreSQL started.");
 	}
+	
+	
+	@TestConfiguration
+	static class AbstractTestConfiguration{
+		
+		@Bean(name=ConfigDatasource.DATASOURCE)
+		@Primary
+		public DataSource getDataSourceOperacional() {
+			HikariDataSource hikary = new HikariDataSource();
+			hikary.setDataSource(dataSource);
+			return hikary;
+		}
+		
+	}
+	
 
 	private static void loadData() throws SQLException, IOException {
 		
@@ -63,12 +84,17 @@ public class AbstractTest {
         }
         br.close();
 		
-        try (Connection conn = dataSource.getConnection()) {
-        	Statement statement = conn.createStatement();
-        	LOGGER.info("INFO");
-        	LOGGER.info(sb.toString());
-        	statement.execute(sb.toString());
+        String[] sentences = sb.toString().split(";");
+        
+        for(int i=0 ; i < sentences.length; i++){
+        	try (Connection conn = dataSource.getConnection()) {
+        		Statement statement = conn.createStatement();
+        		LOGGER.info("**********EXECUTE***********");
+        		LOGGER.info(sentences[i]);
+        		statement.execute(sentences[i]+";");
+        	}        	
         }
+        
 	}
 	
 	
