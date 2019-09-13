@@ -1,9 +1,9 @@
 # Getting Started
 
 Example junits:
-  * Case with check endpoints.
-  * Case with Service without access to database.
-  * Case with Service with accesss Database Postgresql and script repository.
+  * Case to verify endpoints.
+  * Case Service without access to database.
+  * Case Service with accesss Database Postgresql and script repository.
 
 ### Reference Documentation
 
