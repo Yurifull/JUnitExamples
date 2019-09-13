@@ -22,7 +22,7 @@ import com.samp.app.service.SrvFilm;
 		{
 			FilmController.class
 		})
-public class AbstractTestController {
+public class AbstractControllerTest {
 	
 	@MockBean
 	protected SrvFilm srvFilm;

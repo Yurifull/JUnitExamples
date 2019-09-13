@@ -1,11 +1,12 @@
 package com.samp.app.junittest;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 
 import com.samp.app.configuration.AbstractDatabaseTest;
 import com.samp.app.service.SrvFilm;
@@ -16,6 +17,18 @@ import com.samp.app.service.SrvFilm;
  */
 public class SrvFilmTest extends AbstractDatabaseTest {
 
+	@TestConfiguration
+	static class AbstractTestConfiguration{
+		
+		public static final String DATASOURCE = "ds/datasource";
+		
+		@Bean(name=DATASOURCE)
+		@ConfigurationProperties(prefix = "postgres.junit")
+		public DataSource getDataSourceOperacional() {
+			return dataSource;
+		}
+		
+	}
 	
 	@Autowired
 	private SrvFilm srvFilm;
@@ -24,22 +37,9 @@ public class SrvFilmTest extends AbstractDatabaseTest {
 	@Test 
 	public void exampleTest(){
 		
-		
+		LOGGER.info("INIT CALL PROCEDURE");
 		System.out.println(srvFilm.findAllMovies());
 		
-		
-		try(Connection conn = dataSource.getConnection()){
-			Statement statement = conn.createStatement();
-			ResultSet resultset = statement.executeQuery("SELECT * FROM junit.films");
-			
-			while (resultset.next()) {              
-				System.out.println(resultset.getString("code"));
-			}
-			
-		}
-		catch (Exception ex){
-			System.out.println(ex);
-		}
 	}
 	
 }

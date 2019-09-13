@@ -6,12 +6,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
-import com.samp.app.configuration.AbstractTestController;
+import com.samp.app.configuration.AbstractControllerTest;
 
 /**
  * @Author yperez
  */
-public class FilmControllerTest extends AbstractTestController{
+public class FilmControllerTest extends AbstractControllerTest{
 	
 	 @Test
 	 public void testListarBancosPagoInternet() throws Exception{

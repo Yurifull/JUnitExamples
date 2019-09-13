@@ -1,24 +1,15 @@
--- FUNCTION: junit.findallmovies()
+CREATE SCHEMA junit;
+CREATE TABLE junit.films (code varchar(100));
 
--- DROP FUNCTION junit.findallmovies();
-
-CREATE OR REPLACE FUNCTION junit.findallmovies(
-	)
+CREATE OR REPLACE FUNCTION junit.findallmovies()
     RETURNS SETOF character varying 
     LANGUAGE 'sql'
-
     COST 100
     VOLATILE 
     ROWS 1000
 AS $BODY$SELECT code as code FROM junit.films;$BODY$;
 
-ALTER FUNCTION junit.findallmovies()
-    OWNER TO test;
     
-    
-CREATE TABLE junit.films (code varchar(100));
-
-
 INSERT INTO junit.films VALUES ('Bob Esponja');
 INSERT INTO junit.films VALUES ('Transformers');
 INSERT INTO junit.films VALUES ('Pablo el Escoba');
@@ -29,7 +20,5 @@ INSERT INTO junit.films VALUES ('El Zorro');
 INSERT INTO junit.films VALUES ('Lego');
 INSERT INTO junit.films VALUES ('Titanic');
 INSERT INTO junit.films VALUES ('Regreso al futuro');
-
-select junit.findallmovies();
 
     
