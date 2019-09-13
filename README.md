@@ -8,7 +8,7 @@ Example junits:
 ### Reference Documentation
 
 https://reflectoring.io/spring-boot-test/
-
+https://github.com/yandex-qatools/postgresql-embedded
 http://blog.rizvn.com/2018/04/testing-database-querries-with-embedded.html
 https://www.codota.com/code/java/packages/com.opentable.db.postgres.embedded
 
