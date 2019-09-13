@@ -19,6 +19,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.opentable.db.postgres.embedded.EmbeddedPostgres;
+import com.samp.app.JunitTestApplication;
 
 /**
  * Class for started database postgres session.

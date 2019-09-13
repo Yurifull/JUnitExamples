@@ -1,5 +1,10 @@
 package com.samp.app.junittest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.junit.Test;
@@ -9,6 +14,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import com.samp.app.configuration.AbstractDatabaseTest;
+import com.samp.app.model.FilmTO;
 import com.samp.app.service.SrvFilm;
 
 /**
@@ -38,8 +44,10 @@ public class SrvFilmTest extends AbstractDatabaseTest {
 	public void exampleTest(){
 		
 		LOGGER.info("INIT CALL PROCEDURE");
-		System.out.println(srvFilm.findAllMovies());
+		List<FilmTO> out = srvFilm.findAllMovies();
 		
+		assertNotNull(out);
+		assertEquals(out.size(), 10);
 	}
 	
 }
